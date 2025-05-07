@@ -51,13 +51,21 @@ Le fichier principal qui exécute tout le projet :
 ### Structure du projet
 
 gethars/
+
 ├── const/             # Constantes importantes
+
 ├── exports/           # Contient les fichiers .har générés
+
 ├── utils/             # Fonctions réutilisables
+
 │   ├── forms/         # Fonctions liées aux formulaires
+
 │   ├── hubs/          # Fonctions liées aux hubs
+
 │   └── triggers/      # Fonctions liées à Puppeteer
+
 ├── Urls.js            # Configurations à exécuter
+
 ├── index.js           # Point d'entrée principal du script
 
 
