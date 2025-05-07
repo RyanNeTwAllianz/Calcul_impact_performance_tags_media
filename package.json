@@ -1,0 +1,16 @@
+{
+  "name": "getHars",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "author": "Ryan",
+  "license": "ISC",
+  "type": "module",
+  "description": "Generate har files",
+  "dependencies": {
+    "puppeteer": "^24.7.1",
+    "puppeteer-har": "^1.1.2"
+  }
+}
