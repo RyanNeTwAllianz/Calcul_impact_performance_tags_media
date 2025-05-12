@@ -1,14 +1,15 @@
 {
-  "name": "getHars",
+  "name": "Get hars",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "node index.js"
+    "dev": "node index.js",
+    "unify": "python main.py"
   },
   "author": "Ryan",
   "license": "ISC",
   "type": "module",
-  "description": "Generate har files",
+  "description": "Generate har files and return a csv file",
   "dependencies": {
     "puppeteer": "^24.7.1",
     "puppeteer-har": "^1.1.2"

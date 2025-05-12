@@ -25,6 +25,4 @@ for (const url in urls) {
         console.log(`${element.acceptCookies ? 'with' : 'without'} cookies finished with success, iteration number: ${iteration}`)
         iteration++
     }
-
-    iteration = 0
 }

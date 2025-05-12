@@ -1,6 +1,16 @@
-
 #Ignore files
+
+##Javascript
 node_modules
+
+##Other
 test.txt
-exports
 .env
+
+##Python
+__pycache__
+
+##Files
+exports
+analyse*
+unifed_hars.har

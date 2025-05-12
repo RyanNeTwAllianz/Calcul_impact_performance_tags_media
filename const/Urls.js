@@ -15,6 +15,13 @@ const autoHubUrl = 'https://www.allianz.fr/assurance-particulier/vehicules/assur
 
 const urls = [
     {
+        url: autoHubUrl,
+        acceptCookies: true,
+        fileName: 'auto-tarif-fq_lp-hub',
+        isHar: true,
+        function: async(page) => AutoHub(page)
+    },
+    {
         url: autoFormUrl,
         acceptCookies: true,
         fileName: 'auto-tarif-pl_direct',
@@ -67,13 +74,6 @@ const urls = [
         fileName: 'auto-tarif-fq_direct_no-consent',
         isHar: true,
         function: async(page) => AutoFormFq(page)
-    },
-    {
-        url: autoHubUrl,
-        acceptCookies: true,
-        fileName: 'auto-tarif-fq_lp-hub',
-        isHar: true,
-        function: async(page) => AutoHub(page)
     }
 ]
 
