@@ -21,7 +21,10 @@ def get_hars():
     last_dir = subdirs[0]
     print(f"File choosen : {last_dir}")
     har_files = list(last_dir.glob("*.har"))    
+    
     return har_files
+
+
 
 def unify_hars() -> str:
     har_files = get_hars()
@@ -36,5 +39,3 @@ def unify_hars() -> str:
         print("File created")
     
     return file_name
-
-unify_hars()

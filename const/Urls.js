@@ -2,7 +2,6 @@ import AutoFormFq from "../utils/forms/AutoFormFq.js";
 import AutoForm from "../utils/forms/AutoForm.js";
 import AutoHub from "../utils/hubs/AutoHub.js";
 import AutoFormOnlyFirstStep from '../utils/forms/AutoFormOnlyFirstStep.js'
-
 import HealthForm from "../utils/forms/HealthForm.js";
 import HealthHub from "../utils/hubs/HealthHub.js";
 import ActivateHar from "../utils/ActivateHar.js";

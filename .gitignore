@@ -5,6 +5,7 @@ node_modules
 
 ##Other
 test.txt
+test.py
 .env
 
 ##Python
@@ -12,5 +13,6 @@ __pycache__
 
 ##Files
 exports
+csv
 analyse*
 unifed_hars.har

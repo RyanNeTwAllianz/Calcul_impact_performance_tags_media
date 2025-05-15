@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node index.js",
-    "unify": "python main.py"
+    "csv": "python main.py"
   },
   "author": "Ryan",
   "license": "ISC",

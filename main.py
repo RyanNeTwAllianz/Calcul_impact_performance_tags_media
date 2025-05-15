@@ -1,6 +1,8 @@
+import os
 import json
-import xlsxwriter # type: ignore
-from unify_hars import unify_hars
+import xlsxwriter  # type: ignore
+from unify_hars import get_hars
+import os
 
 # Liste des mots-clés pour chaque outil
 OUTIL_KEYWORDS = {
@@ -28,8 +30,7 @@ OUTIL_KEYWORDS = {
 }
 
 
-
-def analyze_har_to_excel(har_file_path, output_xlsx):
+def analyze_har_to_excel(har_file_path, workbook, sheet_name):
     with open(har_file_path, 'r', encoding='utf-8') as f:
         har_data = json.load(f)
 
@@ -67,14 +68,12 @@ def analyze_har_to_excel(har_file_path, output_xlsx):
         round(sum(r[4] for r in results), 2)
     ]
 
-    workbook = xlsxwriter.Workbook(output_xlsx)
-    worksheet = workbook.add_worksheet("Analyse Outils")
+    worksheet = workbook.add_worksheet(sheet_name)
 
     headers = ["Outil", "Content Download (ms)", "Temps réel utilisé (ms)", "Nombre de requêtes", "Poids total (Ko)"]
     worksheet.write_row(1, 0, headers)
 
     # Formats
-    header_format = workbook.add_format({'bold': True})
     total_format = workbook.add_format({'bg_color': '#C6EFCE', 'bold': True})
     number_format = workbook.add_format({'num_format': '0.00'})
     int_format = workbook.add_format({'num_format': '0'})
@@ -133,13 +132,29 @@ def analyze_har_to_excel(har_file_path, output_xlsx):
     worksheet.set_column("A:A", 35)
     worksheet.set_column("B:E", 22)
 
+
+def main():
+    #Récuperation des fichiers .har du dernier crawl
+    xs = get_hars()
+    
+    #Création du fichier .har
+    folder_name = str(xs[0]).split("\\")[1]
+    output_file = f'./csv/{folder_name}.xlsx'
+    workbook = xlsxwriter.Workbook(output_file)
+
+    #Loop sur les paths des .har
+    for x in xs: 
+        print(f"Processing: {x}")
+        input = str(x).replace("\\", "/")
+        output = input.replace(".har", "").split("/")
+        
+        sheet_name = str(output[2])[slice(-30, None)]
+        
+        #Traitement des données
+        analyze_har_to_excel(f'./{input}', workbook, sheet_name)
+    
     workbook.close()
+    print(f"Results saved to {output_file}")
 
 
-# Récuperation des .har depuis le dernier dossier crée
-file_name = unify_hars()
-
-
-# Exemple d'utilisation :
-# analyze_har_to_excel('ficher_source.har', 'fichier_export.xlsx')
-analyze_har_to_excel(file_name, 'analyse_impact_outils-allianz-pupperteer.xlsx')
+main()

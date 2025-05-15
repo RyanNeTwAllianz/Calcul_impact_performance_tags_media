@@ -8,12 +8,6 @@ Clonez le projet et accédez au dossier :
 cd gethars
 ```
 
-Crée le dossier "exports" :
-
-```bash
-mkdir exports
-```
-
 Installez les dépendances :
 
 ```bash

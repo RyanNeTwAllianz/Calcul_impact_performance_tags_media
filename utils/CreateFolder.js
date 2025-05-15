@@ -1,11 +1,9 @@
-import GetTodayDateAndTime from './GetTodayDateAndTime.js'
 import fs from 'fs'
 
-const CreateFolder = () => {
-    const folderName = `export_${GetTodayDateAndTime()}`
-    fs.mkdirSync(`./exports/${folderName}`)
+const CreateFolder = (path) => {
+    if (fs.existsSync(path)) return
 
-    console.log(`Folder created: ${folderName}`)
-    return folderName
+    fs.mkdirSync(`${path}`)
+    console.log(`Folder created: ${path}`)
 }
 export default CreateFolder
