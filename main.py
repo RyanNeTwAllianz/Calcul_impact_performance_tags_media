@@ -1,8 +1,11 @@
-import os
 import json
 import xlsxwriter  # type: ignore
 from unify_hars import get_hars
 import os
+from unify_hars import unify_hars
+import argparse
+
+
 
 # Liste des mots-clés pour chaque outil
 OUTIL_KEYWORDS = {
@@ -30,9 +33,14 @@ OUTIL_KEYWORDS = {
 }
 
 
-def analyze_har_to_excel(har_file_path, workbook, sheet_name):
-    with open(har_file_path, 'r', encoding='utf-8') as f:
-        har_data = json.load(f)
+#Recuper l'argument du script en js
+parser = argparse.ArgumentParser()
+parser.add_argument('--mode', type=str, required=True, help='Mode à passer')
+args = parser.parse_args()
+argIteration = int(args.mode)
+
+
+def analyze_har_to_excel(har_data, workbook, sheet_name, isAverage):
 
     entries = har_data['log']['entries']
     results = []
@@ -40,7 +48,7 @@ def analyze_har_to_excel(har_file_path, workbook, sheet_name):
     for outil, keywords in OUTIL_KEYWORDS.items():
         tool_entries = [
             e for e in entries 
-            if any(k in e['request']['url'] for k in keywords)
+            if any(k in e['request']['url'].split('/')[2] for k in keywords)
         ]
 
         content_download = sum(e['timings'].get('receive', 0) for e in tool_entries)
@@ -51,6 +59,13 @@ def analyze_har_to_excel(har_file_path, workbook, sheet_name):
             e.get('response', {}).get('content', {}).get('size', 0) 
             for e in tool_entries
         ) / 1024
+        
+        if isAverage:
+            content_download = content_download / argIteration
+            wait = wait / argIteration
+            total_time = content_download + wait
+            total_weight_ko = total_weight_ko / argIteration
+            request_count = request_count / argIteration
 
         results.append([
             outil,
@@ -135,24 +150,53 @@ def analyze_har_to_excel(har_file_path, workbook, sheet_name):
 
 def main():
     #Récuperation des fichiers .har du dernier crawl
-    xs = get_hars()
+    hars = get_hars()
     
     #Création du fichier .har
-    folder_name = str(xs[0]).split("\\")[1]
-    output_file = f'./csv/{folder_name}.xlsx'
+    folder_name = str(hars[0]).split("\\")[1]
+    
+    if not os.path.isdir(f'./csv/{folder_name}'):
+        os.makedirs(f'./csv/{folder_name}')
+        
+    output_file = f'./csv/{folder_name}/One.xlsx'
     workbook = xlsxwriter.Workbook(output_file)
 
     #Loop sur les paths des .har
-    for x in xs: 
-        print(f"Processing: {x}")
+    for x in hars:
         input = str(x).replace("\\", "/")
         output = input.replace(".har", "").split("/")
         
         sheet_name = str(output[2])[slice(-30, None)]
         
         #Traitement des données
-        analyze_har_to_excel(f'./{input}', workbook, sheet_name)
+        with open(f'./{input}', 'r', encoding='utf-8') as f:
+            har_data = json.load(f)
+        analyze_har_to_excel(har_data, workbook, sheet_name, False)
     
+    print('CSV affichant chaque itération de chaque parcours finit !')
+    workbook.close()
+    print(f"Results saved to {output_file}")
+    
+    output_file = f'./csv/{folder_name}/Tot.xlsx'
+    workbook = xlsxwriter.Workbook(output_file)
+    
+    hars_filtred = {"log": {"entries": []}} 
+    itr = 0
+    for x in hars:
+        input = str(x).replace("\\", "/")
+        entries = unify_hars(f'./{input}')
+        hars_filtred["log"]["entries"].extend(entries)
+        
+        #Loop en modulo 3 pour faire la somme des itération des parcours
+        if (itr + 1) % argIteration == 0:
+            output = input.replace(".har", "").split("/")
+            sheet_name = str(output[2])[slice(-30, None)]
+            
+            analyze_har_to_excel(hars_filtred, workbook, sheet_name[:-2], True)
+            hars_filtred["log"]["entries"] = []
+            
+        itr = itr + 1
+    print('CSV affichant la somme de chaque parcours finit !')   
     workbook.close()
     print(f"Results saved to {output_file}")
 

@@ -1,17 +1,6 @@
 from pathlib import Path
 import json
 
-har_unifie = {
-    "log": {
-        "version": "1.2",
-        "creator": {
-            "name": "Ryan",
-            "version": "1.0"
-        },
-        "entries": []
-    }
-}
-
 file_name = "unifed_hars.har"
 
 def get_hars():
@@ -26,16 +15,21 @@ def get_hars():
 
 
 
-def unify_hars() -> str:
-    har_files = get_hars()
-    for har_path in har_files:
-        with open(har_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-            entries = data.get("log", {}).get("entries", [])
-            har_unifie["log"]["entries"].extend(entries)
-            
-    with open(file_name, 'w', encoding='utf-8') as out:
-        json.dump(har_unifie, out, indent=2)
-        print("File created")
-    
-    return file_name
+def unify_hars(har_file) -> str:
+    print(har_file)
+    har_unifie = {
+        "log": {
+            "version": "1.2",
+            "creator": {
+                "name": "Ryan",
+                "version": "1.0"
+            },
+            "entries": []
+        }
+    }
+    with open(har_file, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+        entries = data.get("log", {}).get("entries", [])
+        har_unifie["log"]["entries"].extend(entries)
+        
+    return har_unifie["log"]["entries"]

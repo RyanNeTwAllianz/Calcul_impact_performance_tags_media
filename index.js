@@ -3,6 +3,8 @@ import Init from './utils/Init.js';
 import urls from './const/Urls.js'
 import CreateFolder from './utils/CreateFolder.js';
 import GetTodayDateAndTime from './utils/GetTodayDateAndTime.js';
+import GetArgsFromCmd from './utils/GetArgsFromCmd.js';
+import ExecutePython from './utils/ExecutePython.js';
 
 //Crée le dossier exports et csv
 CreateFolder('./exports')
@@ -12,13 +14,16 @@ CreateFolder('./csv')
 const folderName = `export_${GetTodayDateAndTime()}`
 CreateFolder(`./exports/${folderName}`)
 
+//Recuper la variable depuis la commande
+const argIteration = GetArgsFromCmd()
+
 //Loop sur chaque parcours
 for (const url in urls) {
     const element = urls[url]
     console.log(`${element.fileName} ${element.acceptCookies ? 'with' : 'without'} cookies start crawl ...`)
     
     let iteration = 1
-    while (iteration <= 3) {
+    while (iteration <= argIteration) {
         //Lancement du browser ainsi que l'enregistrement des .har
         const {browser, page, har} = await Init(
             element,
@@ -37,3 +42,6 @@ for (const url in urls) {
         iteration++
     }
 }
+
+//Execute le script python afin de crée les differents .csv dans le dossier csv
+ExecutePython(argIteration)

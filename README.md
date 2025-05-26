@@ -14,10 +14,22 @@ Installez les dépendances :
 npm i
 ```
 
-Lancez le script :
+Lancez le script pour le crawl des .har :
 
 ```bash
-npm run dev
+npm run dev -- iteration
+```
+
+"iteration" est le nombre d'exmplaire par parcours, exemple :
+
+```bash
+npm run dev -- 5
+```
+
+Lancer le script pour formatter en xlxs (excel) :
+
+```bash
+npm run csv
 ```
 
 ## Guide
