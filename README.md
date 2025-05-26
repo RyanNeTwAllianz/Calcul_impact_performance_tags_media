@@ -26,6 +26,8 @@ npm run dev -- iteration
 npm run dev -- 5
 ```
 
+*La commande npm run dev -- 5 suffit pour récuperer les .har et convertir le tout en csv
+
 Lancer le script pour formatter en xlxs (excel) :
 
 ```bash
