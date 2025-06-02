@@ -29,7 +29,6 @@ for (const url in urls) {
             element,
             folderName,
             iteration
-            
         )
 
         //Execution de la fonction propre a l'élement

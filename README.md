@@ -20,7 +20,7 @@ Lancez le script pour le crawl des .har :
 npm run dev -- iteration
 ```
 
-"iteration" est le nombre d'exmplaire par parcours, exemple :
+"iteration" est le nombre d'exemplaires par parcours, exemple :
 
 ```bash
 npm run dev -- 5
@@ -28,7 +28,7 @@ npm run dev -- 5
 
 *La commande npm run dev -- 5 suffit pour récuperer les .har et convertir le tout en csv
 
-Lancer le script pour formatter en xlxs (excel) :
+( Optionnel ) Lancer le script pour formatter en xlxs (excel) :
 
 ```bash
 npm run csv
@@ -81,6 +81,8 @@ gethars/
 ├── Urls.js            # Configurations à exécuter
 
 ├── index.js           # Point d'entrée principal du script
+
+├── main.py            # Deuxieme étape du script
 
 
 ### Fonctionnalités principales
