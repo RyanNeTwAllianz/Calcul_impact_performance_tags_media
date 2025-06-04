@@ -7,9 +7,9 @@ const rawData = {
   '92000': ['postalCodeHealth', 'zipCode'],
   'FX442KR': ['immatNumber'],
   '20': ['licenseObtainedAge', 'addressNumber'],
-  '04/2023': ['purchaseDate'],
+  '04/2019': ['purchaseDate'],
   'Boulevard allianz': ['addressName'],
-  '09/01/2022': ['licenseIssueDate']
+  '09/01/2019': ['licenseIssueDate']
 }
 
 const idToValueMap = new Map()

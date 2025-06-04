@@ -57,16 +57,16 @@ const AutoFormPl = async(page) => {
 
     //11th step
     await new Promise(resolve => setTimeout(resolve, 2000))
-    await Click(page, 'nx-circle-toggle:has(input[aria-labelledby="nx-circle-toggle-group-12-button-45-label"])')
+    await Click(page, 'nx-circle-toggle:has(input[aria-labelledby="nx-circle-toggle-group-12-button-44-label"])')
     await Click(page, 'nx-dropdown[formcontrolname="verifiedInsuredMonths"]')
-    await Click(page, 'nx-dropdown-item[id="nx-dropdown-item-80"]')
+    await Click(page, 'nx-dropdown-item[id="nx-dropdown-item-83"]')
     await Click(page, '.nx-button--primary')
 
     //12th step
     await Click(page, 'nx-dropdown[formcontrolname="formerInsurerCode"]')
     await Click(page, 'nx-dropdown-item[id="nx-dropdown-item-84"]')
     await Click(page, 'nx-dropdown[formcontrolname="insuredYears"]')
-    await Click(page, 'nx-dropdown-item[id="nx-dropdown-item-103"]')
+    await Click(page, 'nx-dropdown-item[id="nx-dropdown-item-108"]')
     await Click(page, '.nx-button--primary')
 
     //13th step
