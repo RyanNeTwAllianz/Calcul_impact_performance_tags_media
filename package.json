@@ -11,7 +11,7 @@
   "author": "Ryan",
   "license": "ISC",
   "type": "module",
-  "description": "Generate har files and return a csv file",
+  "description": "Get har files from Allianz forms and return two csv files",
   "dependencies": {
     "childprocess": "^2.0.2",
     "minimist": "^1.2.8",

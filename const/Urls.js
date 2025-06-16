@@ -5,12 +5,18 @@ import AutoFormOnlyFirstStep from '../utils/forms/AutoFormOnlyFirstStep.js'
 import HealthForm from "../utils/forms/HealthForm.js";
 import HealthHub from "../utils/hubs/HealthHub.js";
 import ActivateHar from "../utils/ActivateHar.js";
+import NveiFrom from "../utils/forms/NveiFrom.js";
+import MrhFromFq from "../utils/forms/MrhFromFq.js";
 
 const healthFormUrl = 'https://www.allianz.fr/assurance-particulier/formulaire/devis-sante.html'
 const healthHubUrl = 'https://www.allianz.fr/assurance-particulier/sante-prevoyance/assurance-sante.html'
 
 const autoFormUrl = 'https://devis-assurance.allianz.fr/tarif-auto/collect-data'
 const autoHubUrl = 'https://www.allianz.fr/assurance-particulier/vehicules/assurance-auto.html'
+
+const nveiFormUrl = 'https://www.allianz.fr/assurance-particulier/vehicules/assurance-autres-vehicules/nouvelles-mobilites/devis-contact.html'
+
+const mrhFromUrl = 'https://devis-assurance.allianz.fr/tarif-express-habitation/fq'
 
 const urls = [
     {
@@ -73,6 +79,20 @@ const urls = [
         fileName: 'auto-tarif-fq_direct_no-consent',
         isHar: true,
         function: async(page) => AutoFormFq(page)
+    },
+    {
+        url: nveiFormUrl,
+        acceptCookies: true,
+        fileName: 'nvei-confirmation_direct',
+        isHar: true,
+        function: async(page) => NveiFrom(page)
+    },
+    {
+        url: mrhFromUrl,
+        acceptCookies: true,
+        fileName: 'mrh-fq-confirmation_direct',
+        isHar: true,
+        function: async(page) => MrhFromFq(page)
     }
 ]
 

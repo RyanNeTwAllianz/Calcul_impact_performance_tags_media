@@ -6,7 +6,7 @@ import GetTodayDateAndTime from './utils/GetTodayDateAndTime.js';
 import GetArgsFromCmd from './utils/GetArgsFromCmd.js';
 import ExecutePython from './utils/ExecutePython.js';
 
-//Crée le dossier exports et csv
+//Crée le dossier exports et csv s'ils n'exsitent pas
 CreateFolder('./exports')
 CreateFolder('./csv')
 
@@ -14,9 +14,8 @@ CreateFolder('./csv')
 const folderName = `export_${GetTodayDateAndTime()}`
 CreateFolder(`./exports/${folderName}`)
 
-//Recuper la variable depuis la commande
+//Recuper la variable depuis la commande si elle est pas renseigné par defaut 3
 const argIteration = GetArgsFromCmd()
-
 //Loop sur chaque parcours
 for (const url in urls) {
     const element = urls[url]
@@ -31,7 +30,7 @@ for (const url in urls) {
             iteration
         )
 
-        //Execution de la fonction propre a l'élement
+        //Execution de la fonction propre a l'élement return void la plupart du temps
         const harOpt = await element.function(page, element, folderName, iteration)
 
         //Arrete l'execution du browser et aussi l'enregistrement des .har
@@ -42,5 +41,5 @@ for (const url in urls) {
     }
 }
 
-//Execute le script python afin de crée les differents .csv dans le dossier csv
+//Execute le script python afin de crée les deux csv dans le dossier csv et ensuite sous dossier
 ExecutePython(argIteration)

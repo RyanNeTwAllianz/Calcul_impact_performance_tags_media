@@ -4,7 +4,7 @@ const rawData = {
   'supervision@allianz.fr': ['emailAddress', 'email'],
   '0656050656': ['phoneNumber'],
   '03/05/2001': ['birthDate', 'dateOfBirth'],
-  '92000': ['postalCodeHealth', 'zipCode'],
+  '92000': ['postalCodeHealth', 'zipCode', 'cityZipcode'],
   'FX442KR': ['immatNumber'],
   '20': ['licenseObtainedAge', 'addressNumber'],
   '04/2019': ['purchaseDate'],
