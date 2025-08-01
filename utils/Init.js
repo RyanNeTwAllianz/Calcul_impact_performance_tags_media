@@ -17,7 +17,7 @@ const Init = async (element, folderName, iteration) => {
                 '--disable-web-security',
                 '--disable-site-isolation-trials',
                 '--enable-blink-features=CrossOriginOpenerPolicy',
-                '--proxy-server=fr000-surf.zone2.proxy.allianz:8080'
+                //'--proxy-server=fr000-surf.zone2.proxy.allianz:8080'
             ]
         })
 
